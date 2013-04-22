@@ -14,7 +14,8 @@
 Ext.define('Ismax.view.desktop.Startmenu', {
   extend: 'Ext.menu.Menu',
   alias: 'widget.startmenu',
-
+  height: 130,
+  width: 300,
   initComponent: function(){
     var me = this;
 
@@ -25,12 +26,14 @@ Ext.define('Ismax.view.desktop.Startmenu', {
       },
       items: [{
         text: 'Сменить пароль',
-        action: 'chpwd',
-        iconCls: 'real_start_menu_icon_chpwd'
+        action: 'change',
+        iconCls: 'real_start_menu_icon_change',
+        textAlign: 'left'
       }, {
         text: 'Выход',
         action: 'loguot',
-        iconCls: 'real_start_menu_icon_logout'
+        iconCls: 'real_start_menu_icon_logout',
+        textAlign: 'left'
       }]
     });
 

@@ -27,12 +27,16 @@ Ext.define('Ismax.controller.Socket', {
     var app = this.application;
     var socket = io.connect('http://operator.ismaxonline.com:3000', {resource  :'ismax.io'});
 
+    // При потере сокет соединения
     socket.on('disconnect', function (){
-      alert('disconnect');
+      me.getController('Desktop').tip('socket_disconnect', 'Сокет соединение потеряно', true, null, this);
       //socket.socket.connect();    
     });
 
-    socket.on('error', function(){alert('error')});
+    // При ошибке сокет соединения
+    socket.on('error', function(){
+      me.getController('Desktop').tip('socket_error', 'Ошибка сокет соединения', true, null, this);
+    });
 
     socket.on('connect', function(){
       socket.on('command', function(data){
@@ -42,7 +46,7 @@ Ext.define('Ismax.controller.Socket', {
         }
       });
 
-      me.sendCommand('operator_visitor_get', {}, null, false);
+      me.getController('Desktop').tip('socket_connect', 'Сокет соединение установлено', true, null, this);
     });
 
     app.socket = socket;

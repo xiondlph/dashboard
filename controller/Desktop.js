@@ -39,8 +39,8 @@ Ext.define('Ismax.controller.Desktop', {
       'startmenu toolbar button[action=loguot]': {
         click: this.signout
       },
-      'startmenu toolbar button[action=chpwd]': {
-        click: this.chpwd
+      'startmenu toolbar button[action=change]': {
+        click: this.change
       }
     });
 
@@ -62,38 +62,37 @@ Ext.define('Ismax.controller.Desktop', {
         ]
       });
 
+      // Формирования пунктов главного меню
+      this.getStore('Shortcuts').each(function(rec){
+        this.getController('Desktop').startMenu.add({
+          text: rec.get('name'),
+          itemId: rec.get('id'),
+          iconCls: 'real_icon_'+rec.get('id'),
+          handler: this.getController('Desktop').startMenuItemClick,
+          scope: this.getController('Desktop')
+        });
+      }, this);
+
       this.desktop.setLoading('Загрузка');
       Ext.Ajax.request({
-        url: '/desktop/env',
+        url: '/profile/get',
         scope:this,
         success: function(response, opts){
           var data = Ext.decode(response.responseText);
           this.desktop.setLoading(false);
           if(data.success){
-            this.getStore('Shortcuts').loadData(data.shortcuts);
-            
-            // Формирования пунктов главного меню
-            for(i = 0; i < data.shortcuts.length; i++){
-              this.getController('Desktop').startMenu.add({
-                text: data.shortcuts[i].name,
-                itemId: data.shortcuts[i].id,
-                iconCls: 'real_icon_'+data.shortcuts[i].id,
-                handler: this.getController('Desktop').startMenuItemClick,
-                scope: this.getController('Desktop')
-              });
-            }
+
+            this.getController('Desktop').startMenu.add({
+              text: 'Профиль',
+              itemId: 'profile',
+              iconCls: 'real_icon_profile',
+              handler: this.getController('Desktop').startMenuItemClick,
+              scope: this.getController('Desktop')
+            });
 
             // Заполнения хранилища профиля
-            this.getStore('Profile').loadRawData(data.operator);
-            this.getController('Desktop').startMenu.title = data.operator.name;
-        
-            // Формирования списка предложений
-            this.getStore('Offers').loadData(data.offers);
-            for(i=0; i<data.offers.length; i++){
-              this.getController('Offers')
-                .getParamStore(data.offers[i]._id)
-                .loadData(data.offers[i].params);
-            }
+            this.getStore('Profile').loadRawData(data.profile);
+            this.getController('Desktop').startMenu.title = data.profile.name;
 
             // Открытие сокет соединения
             this.getController('Socket').open();
@@ -171,7 +170,9 @@ Ext.define('Ismax.controller.Desktop', {
 
   // Создание окна
   createWindow: function(module){
-    var win = Ext.widget(module);
+    var win = Ext.widget(module, {
+      renderTo: this.desktopview.body
+    });
     this.windows.add(win);
 
     win.taskButton = this.addTaskButton(win);
@@ -345,8 +346,8 @@ Ext.define('Ismax.controller.Desktop', {
   },
 
   // Смена пароля
-  chpwd: function(btn){
-    this.getController('Secure').formСhpwd();
+  change: function(btn){
+    this.getController('Secure').formChange();
   },
 
   // Отображения всплавающего сообщения

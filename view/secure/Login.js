@@ -21,11 +21,10 @@ Ext.define('Ismax.view.secure.Login', {
   closable: false,
   resizable: false,
   closeAction: 'destroy',
-
+  constrain: true,
   initComponent: function(){
     this.items = [{
       xtype: 'form',
-      bodyStyle: 'background:#e7d3b2;',
       bodyBorder: false,
       bodyPadding: 5,
       waitMsgTarget: true,

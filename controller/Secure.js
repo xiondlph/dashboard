@@ -13,6 +13,11 @@
 Ext.define('Ismax.controller.Secure', {
   extend: 'Ext.app.Controller',
 
+  views:[
+    'secure.Login',
+    'secure.Change',
+  ],
+
   lastData: null,
   lastFocus: null,
 
@@ -22,8 +27,8 @@ Ext.define('Ismax.controller.Secure', {
         click: this.signin
       },
 
-      'chpwd button[action=save]': {
-        click: this.chpwd
+      'change button[action=save]': {
+        click: this.change
       }
     });
 
@@ -75,12 +80,12 @@ Ext.define('Ismax.controller.Secure', {
 
 
   // Форма смены пароля
-  formСhpwd: function(){
-    var win = Ext.widget('chpwd'); 
+  formChange: function(){
+    var win = Ext.widget('change'); 
   },
 
   // Запрос на смену пароля
-  chpwd: function(button){
+  change: function(button){
     var win     = button.up('window'),
         form    = win.down('form'),
         values  = form.getValues();
@@ -89,7 +94,7 @@ Ext.define('Ismax.controller.Secure', {
       win.setLoading('Сохранения');
 
       Ext.Ajax.request({
-        url: '/secure/chpwd',
+        url: '/secure/change',
         scope: this,
         jsonData: {
           password: values.password
@@ -99,6 +104,8 @@ Ext.define('Ismax.controller.Secure', {
           win.setLoading(false);
           if(data.success){
             win.close();
+            this.getController('Desktop').tip('profile_update', 'Пароль успешно изменен', true, null, this);
+            //this.getController('Desktop').playNotification('notify');
           }
         },
         failure: function(response, opts){

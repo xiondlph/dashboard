@@ -13,5 +13,10 @@
 
 Ext.define('Ismax.store.Shortcuts', {
   extend: 'Ext.data.Store',
-  model: 'Ismax.model.Shortcut'
+  model: 'Ismax.model.Shortcut',
+  data: [
+    {id: 'profile',     name: 'Профиль'},
+    {id: 'categories',  name: 'Категории'},
+    {id: 'objects',     name: 'Объекты'}
+  ]
 });

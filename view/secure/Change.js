@@ -9,10 +9,10 @@
 /**!
  * Окно формы смены Email и пароля
  **/
-Ext.define('Ismax.view.secure.Chpwd', {
+Ext.define('Ismax.view.secure.Change', {
   extend: 'Ext.window.Window',
-  alias : 'widget.chpwd',
-  id: 'Chpwd',
+  alias : 'widget.change',
+  id: 'Change',
   modal: true,
   title : 'Смена пароля',
   autoShow: true,
@@ -20,11 +20,10 @@ Ext.define('Ismax.view.secure.Chpwd', {
   border: false,
   resizable: false,
   closeAction: 'destroy',
-
+  constrain: true,
   initComponent: function(){
     this.items = [{
       xtype: 'form',
-      bodyStyle: 'background:#e7d3b2;',
       bodyBorder: false,
       bodyPadding: 5,
       waitMsgTarget: true,

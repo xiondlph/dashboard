@@ -18,6 +18,7 @@ Ext.define('Ismax.view.desktop.Taskbar', {
     this.items = [{
       xtype: 'button',
       iconCls: 'real_start_button_icon',
+      arrowCls: false,
       menu: this.controller.startMenu
     },
       '-',
