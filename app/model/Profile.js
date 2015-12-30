@@ -1,6 +1,6 @@
 Ext.define('Admin.model.Profile', {
     extend: 'Ext.data.Model',
-    
+
     fields: [
         { name: 'email', type: 'auto' },
         { name: 'requests', type: 'int' },

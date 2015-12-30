@@ -16,6 +16,7 @@ Ext.define("Admin.view.profile.Settings",{
 
     items: [{
         xtype: 'form',
+        itemId: 'infoForm',
         defaultType: 'displayfield',
         title: 'Информация',
         bodyPadding: 10,
@@ -28,7 +29,7 @@ Ext.define("Admin.view.profile.Settings",{
             dataIndex: 'requests'
         }, {
             fieldLabel: 'Ключ',
-            value: '85d1fb3b78dfab1d14aebdb44d78eb9ff6b9811515e0698078ad93d7477dc370'
+            dataIndex: 'key'
         }],
         store: 'Profile1'
     }, {
