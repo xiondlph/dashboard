@@ -4,26 +4,26 @@ Ext.define('Admin.view.profile.SettingsController', {
 
 
     init: function(view) {
-        var rec = new Admin.model.Profile({
-            email: 'goff@smith.ru',
-            requests: 9000,
-            address: '127.0.0.1',
-            key: '85d1fb3b78dfab1d14aebdb44d78eb9ff6b9811515e0698078ad93d7477dc370'
-        });
-        view.getComponent('infoForm').loadRecord(rec);
-        rec.set('key', 'mishkas');
-        console.log(view.getComponent('infoForm'));
-    },
+        var rec = new Admin.model.Profile();
 
-    loadSettings: function (btn) {
-        btn.up('form').setLoading('Загрузка');
-        btn.up('form').load({
-            method: 'get'
+        view.getComponent('infoForm').setLoading('Загрузка');
+        view.getComponent('settingForm').setLoading('Загрузка');
+        rec.load({
+            success: function (record, operation) {
+                view.getComponent('infoForm').loadRecord(record);
+                view.getComponent('settingForm').loadRecord(record);
+            },
+            callback: function(record, operation, success) {
+                view.getComponent('infoForm').setLoading(false);
+                view.getComponent('settingForm').setLoading(false);
+            }
         });
     },
 
     saveSettings: function (btn) {
-        btn.up('form').submit();
+        btn.up('form').getRecord().set(btn.up('form').getValues())
+        console.log(btn.up('form').getRecord());
+        btn.up('form').getRecord().save();
     }
     
 });

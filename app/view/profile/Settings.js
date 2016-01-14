@@ -17,16 +17,31 @@ Ext.define("Admin.view.profile.Settings",{
     items: [{
         xtype: 'form',
         itemId: 'infoForm',
-        defaultType: 'displayfield',
+        defaultType: 'textfield',
         title: 'Информация',
         bodyPadding: 10,
         defaults: {
             labelWidth: 120,
+            readOnly: true,
             anchor: '100%'
         },
         items: [{
             fieldLabel: 'Запросов',
-            dataIndex: 'requests'
+            dataIndex: 'requests',
+            triggers: {
+                foo: {
+                    cls: 'my-foo-trigger',
+                    handler: function() {
+                        console.log('foo trigger clicked');
+                    }
+                },
+                bar: {
+                    cls: 'my-bar-trigger',
+                    handler: function() {
+                        console.log('bar trigger clicked');
+                    }
+                }
+            }
         }, {
             fieldLabel: 'Ключ',
             dataIndex: 'key'
@@ -34,7 +49,7 @@ Ext.define("Admin.view.profile.Settings",{
         store: 'Profile1'
     }, {
         xtype: 'form',
-        url: '/profile/get',
+        itemId: 'settingForm',
         defaultType: 'textfield',
         responsiveCls: 'big-50 small-100',
         title: 'Настройки',
@@ -56,11 +71,6 @@ Ext.define("Admin.view.profile.Settings",{
             name: 'address'
         }],
         buttons: [{
-            text: 'Загрузить',
-            listeners: {
-                click: 'loadSettings'
-            }
-        }, {
             text: 'Сохранить',
             formBind: true,
             listeners: {
@@ -69,6 +79,7 @@ Ext.define("Admin.view.profile.Settings",{
         }]
     }, {
         xtype: 'form',
+        itemId: 'passwordForm',
         url: '/password/',
         defaultType: 'textfield',
         responsiveCls: 'big-50 small-100',
