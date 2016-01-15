@@ -51,7 +51,9 @@ Ext.define('Admin.view.main.Viewport', {
                 },
                 {
                     xtype: 'tbtext',
-                    text: 'goff@smith.ru',
+                    bind: {
+                        text: '{Profile.email}'
+                    },
                     cls: 'top-user-name'
                 },
                 {
@@ -59,7 +61,7 @@ Ext.define('Admin.view.main.Viewport', {
                     cls: 'header-right-profile-image',
                     height: 35,
                     width: 35,
-                    alt:'goff@smith.ru',
+                    alt:'Profile icon',
                     src: 'resources/images/profile-icon.png'
                 }
             ]

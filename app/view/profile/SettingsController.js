@@ -4,26 +4,41 @@ Ext.define('Admin.view.profile.SettingsController', {
 
 
     init: function(view) {
-        var rec = new Admin.model.Profile();
+        var me              = this,
+            profileStore    = Ext.data.StoreManager.lookup('Profile');
+
 
         view.getComponent('infoForm').setLoading('Загрузка');
         view.getComponent('settingForm').setLoading('Загрузка');
-        rec.load({
-            success: function (record, operation) {
-                view.getComponent('infoForm').loadRecord(record);
-                view.getComponent('settingForm').loadRecord(record);
-            },
-            callback: function(record, operation, success) {
-                view.getComponent('infoForm').setLoading(false);
-                view.getComponent('settingForm').setLoading(false);
-            }
+        profileStore.load(function(records, operation, success) {
+            me.getViewModel().setData({User: profileStore.getAt(0)});
+
+            view.getComponent('infoForm').loadRecord(profileStore.getAt(0));
+            view.getComponent('settingForm').loadRecord(profileStore.getAt(0));
+
+            view.getComponent('infoForm').setLoading(false);
+            view.getComponent('settingForm').setLoading(false);
         });
     },
 
     saveSettings: function (btn) {
-        btn.up('form').getRecord().set(btn.up('form').getValues())
-        console.log(btn.up('form').getRecord());
-        btn.up('form').getRecord().save();
+        btn.up('form').getRecord().set(btn.up('form').getValues());
+        // btn.up('form').getRecord().save({
+        //     failure: function(record, operation) {
+        //         Ext.MessageBox.show({
+        //             title: 'Ошибка',
+        //             msg: 'Истекло время сессии!',
+        //             buttons: Ext.MessageBox.OK,
+        //             icon: Ext.MessageBox.ERROR
+        //         });
+        //     },
+        //     success: function(record, operation) {
+        //         // do something if the save succeeded
+        //     },
+        //     callback: function(record, operation, success) {
+        //         // do something whether the save succeeded or failed
+        //     }
+        // });
     }
     
 });

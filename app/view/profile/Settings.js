@@ -1,4 +1,3 @@
-
 Ext.define("Admin.view.profile.Settings",{
     extend: "Ext.container.Container",
 

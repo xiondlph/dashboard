@@ -14,6 +14,17 @@ Ext.define('Admin.view.main.ViewportController', {
         ':node': 'onRouteChange'
     },
 
+    init: function(view) {
+        var me              = this,
+            profileStore    = Ext.data.StoreManager.lookup('Profile');
+
+        profileStore.on('load', this.profileLoad, this);
+    },
+
+    profileLoad: function (store, records, successful, operation) {
+        this.getViewModel().setData({Profile: store.getAt(0)});
+    },
+
     setCurrentView: function(hashTag) {
         hashTag = (hashTag || '').toLowerCase();
 
@@ -133,7 +144,7 @@ Ext.define('Admin.view.main.ViewportController', {
 
     onMainViewRender:function() {
         if (!window.location.hash) {
-            this.redirectTo("dashboard");
+            this.redirectTo("profile");
         }
     },
 
