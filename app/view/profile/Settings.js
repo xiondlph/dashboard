@@ -4,7 +4,7 @@ Ext.define("Admin.view.profile.Settings",{
     requires: [
         "Admin.view.profile.SettingsController",
         "Admin.view.profile.SettingsModel",
-        "Ext.ux.layout.ResponsiveColumn",
+        "Ext.ux.layout.ResponsiveColumn"
     ],
 
     controller: "profile-settings",
@@ -28,24 +28,14 @@ Ext.define("Admin.view.profile.Settings",{
             fieldLabel: 'Запросов',
             dataIndex: 'requests',
             triggers: {
-                foo: {
-                    cls: 'my-foo-trigger',
-                    handler: function() {
-                        console.log('foo trigger clicked');
-                    }
-                },
-                bar: {
-                    cls: 'my-bar-trigger',
-                    handler: function() {
-                        console.log('bar trigger clicked');
-                    }
+                glyphed: {
+                    cls: 'trigger-glyph-noop auth-email-trigger'
                 }
             }
         }, {
             fieldLabel: 'Ключ',
             dataIndex: 'key'
-        }],
-        store: 'Profile1'
+        }]
     }, {
         xtype: 'form',
         itemId: 'settingForm',

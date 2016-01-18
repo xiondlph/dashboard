@@ -35,7 +35,7 @@ Ext.define('Admin.view.main.Viewport', {
                     xtype: 'component',
                     reference: 'senchaLogo',
                     cls: 'sencha-logo',
-                    html: '<div class="main-logo"><img src="resources/images/sencha-icon.png">ICsystem</div>',
+                    html: '<div class="main-logo"><img src="resources/images/ismax-icon.png">ISMAX icsystem</div>',
                     width: 250
                 },
                 {
