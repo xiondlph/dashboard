@@ -14,15 +14,22 @@ Ext.define("Admin.view.payment.Form",{
     },
 
     items: [{
-        xtype: 'gridpanel',
         title: 'История платежных операций',
-        store: 'Payments',
-        columns: [
-            { text: 'Дата', dataIndex: 'datetime' },
-            { text: 'Сумма', dataIndex: 'withdraw_amount' },
-            { text: 'Запросы', dataIndex: '_quantity' },
-            { text: 'Итог', dataIndex: '_requests' }
-        ],
-        width: 500
+        items: [{
+            xtype: 'gridpanel',
+            store: 'Payments',
+            columns: [
+                { text: 'Дата', dataIndex: 'datetime', flex: 1},
+                { text: 'Сумма (руб.)', dataIndex: 'withdraw_amount', flex: 1},
+                { text: 'Запросы', dataIndex: '_quantity', flex: 1},
+                { text: 'Итого', dataIndex: '_requests', flex: 1}
+            ],
+            dockedItems: [{
+                xtype: 'pagingtoolbar',
+                store: 'Payments',
+                dock: 'bottom',
+                displayInfo: true
+            }]
+        }]
     }]
 });

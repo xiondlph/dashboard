@@ -7,11 +7,5 @@ Ext.define('Admin.model.Profile', {
         { name: 'address', type: 'auto' },
         { name: 'key', type: 'auto' }
 
-    ],
-
-    proxy: {
-        type: 'rest',
-        url : '/profile/get',
-        appendId: false
-    }
+    ]
 });

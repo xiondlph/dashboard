@@ -67,9 +67,12 @@
      *      ]
      */
     "requires": [
+        "ext-locale",
         "font-awesome",
         "ux"
     ],
+
+    "locale": "ru",
 
     /**
      * Fashion build configuration properties.
