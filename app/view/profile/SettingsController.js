@@ -22,23 +22,31 @@ Ext.define('Admin.view.profile.SettingsController', {
     },
 
     saveSettings: function (btn) {
-        btn.up('form').getRecord().set(btn.up('form').getValues());
-        // btn.up('form').getRecord().save({
-        //     failure: function(record, operation) {
-        //         Ext.MessageBox.show({
-        //             title: 'Ошибка',
-        //             msg: 'Истекло время сессии!',
-        //             buttons: Ext.MessageBox.OK,
-        //             icon: Ext.MessageBox.ERROR
-        //         });
-        //     },
-        //     success: function(record, operation) {
-        //         // do something if the save succeeded
-        //     },
-        //     callback: function(record, operation, success) {
-        //         // do something whether the save succeeded or failed
-        //     }
-        // });
+        var form    = btn.up('form'),
+            record  = form.getRecord();
+
+        record.set(form.getValues(), {silent: true});
+        if (!record.isModified('email') && !record.isModified('address')) {
+            return;
+        }
+
+        form.setLoading('Сохранение');
+        btn.up('form').getRecord().save({
+            failure: function(record, operation) {
+                Ext.MessageBox.show({
+                    title: 'Ошибка',
+                    msg: 'Действие временно недоступно. Попробуйте повторить позже!',
+                    buttons: Ext.MessageBox.OK,
+                    icon: Ext.MessageBox.ERROR
+                });
+            },
+            success: function(record, operation) {
+                btn.up('form').getRecord().commit();
+            },
+            callback: function(record, operation, success) {
+                form.setLoading(false);
+            }
+        });
     }
     
 });
