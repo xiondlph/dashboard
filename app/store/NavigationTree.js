@@ -14,13 +14,13 @@ Ext.define('Admin.store.NavigationTree', {
             text:   'Оплата',
             view:   'payment.Form',
             leaf:   true,
-            iconCls: 'right-icon x-fa fa-credit-card',
+            iconCls: 'x-fa fa-credit-card',
             routeId: 'payment'
         }, {
-            text:   'Пустая страница',
+            text:   'Помощь',
             view:   'pages.BlankPage',
             leaf:   true,
-            iconCls: 'right-icon x-fa fa-desktop',
+            iconCls: 'x-fa fa-question',
             routeId: 'dashboard'
         }]
     },

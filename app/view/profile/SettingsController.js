@@ -35,7 +35,7 @@ Ext.define('Admin.view.profile.SettingsController', {
             failure: function(record, operation) {
                 Ext.MessageBox.show({
                     title: 'Ошибка',
-                    msg: 'Действие временно недоступно. Попробуйте повторить позже!',
+                    msg: 'Действие временно недоступно.<br />Попробуйте повторить позже!',
                     buttons: Ext.MessageBox.OK,
                     icon: Ext.MessageBox.ERROR
                 });
@@ -47,6 +47,25 @@ Ext.define('Admin.view.profile.SettingsController', {
                 form.setLoading(false);
             }
         });
+    },
+
+    savePassword: function (btn) {
+        var form    = btn.up('form');
+
+        form.setLoading('Сохранение');
+        form.submit({
+            failure: function(record, operation) {
+                form.setLoading(false);
+                Ext.MessageBox.show({
+                    title: 'Ошибка',
+                    msg: 'Действие временно недоступно.<br />Попробуйте повторить позже!',
+                    buttons: Ext.MessageBox.OK,
+                    icon: Ext.MessageBox.ERROR
+                });
+            },
+            success: function(record, operation) {
+                form.setLoading(false);
+            }
+        })
     }
-    
 });

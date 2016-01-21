@@ -43,7 +43,7 @@ Ext.define("Admin.view.payment.Form",{
         }, {
             xtype: 'form',
             itemId: 'payForm',
-            defaultType: 'textfield',
+            defaultType: 'numberfield',
             flex: 1,
             title: 'Оплатить',
             bodyPadding: 10,
@@ -55,9 +55,14 @@ Ext.define("Admin.view.payment.Form",{
                 anchor: '100%'
             },
             items: [{
+                beforeBodyEl: 'meshkaz',
                 blankText: 'Следует указать сумму',
                 fieldLabel: 'Сумма (руб.)',
-                name: 'email'
+                validateOnBlur: false,
+                maxValue: 10000,
+                minValue: 0,
+                value: 1000,
+                name: 'sum'
             }],
             buttons: [{
                 text: 'Оплатить',

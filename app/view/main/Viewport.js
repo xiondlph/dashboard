@@ -63,6 +63,13 @@ Ext.define('Admin.view.main.Viewport', {
                     width: 35,
                     alt:'Profile icon',
                     src: 'resources/images/profile-icon.png'
+                },
+                {
+                    cls: 'delete-focus-bg',
+                    iconCls:'x-fa fa-sign-out',
+                    href: '/user/signout',
+                    hrefTarget: '_self',
+                    tooltip: 'Выход'
                 }
             ]
         },
