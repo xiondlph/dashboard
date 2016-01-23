@@ -9,7 +9,11 @@ Ext.application({
     extend: 'Admin.Application',
 
     requires: [
-        'Admin.*'
+        'Admin.view.main.Viewport',
+        'Admin.view.profile.Profile',
+        'Admin.view.payment.Payment',
+        'Admin.view.pages.BlankPage',
+        'Admin.view.pages.Error404Window'
     ],
 
     // The name of the initial view to create. With the classic toolkit this class

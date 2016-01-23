@@ -67,12 +67,9 @@
      *      ]
      */
     "requires": [
-        "ext-locale",
         "font-awesome",
         "ux"
     ],
-
-    "locale": "ru",
 
     /**
      * Fashion build configuration properties.
@@ -562,5 +559,5 @@
      * Uniquely generated id for this application, used as prefix for localStorage keys.
      * Normally you should never change this value.
      */
-    "id": "ff19fc31-9fe5-4a05-af83-8d3b90f52f63"
+    "id": "360c9391-fa43-4e73-bdec-04ce8d9e43ee"
 }

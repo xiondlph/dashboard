@@ -8,15 +8,8 @@ Ext.define('Admin.Application', {
     
     name: 'Admin',
 
-    models: [
-        'Profile',
-        'Payment'
-    ],
-
     stores: [
-        'NavigationTree',
-        'Profile',
-        'Payments'
+        'NavigationTree'
     ],
     
     launch: function () {

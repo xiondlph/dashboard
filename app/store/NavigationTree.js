@@ -6,13 +6,13 @@ Ext.define('Admin.store.NavigationTree', {
         expanded: true,
         children: [{
             text:   'Профиль',
-            view:   'profile.Settings',
+            view:   'profile.Profile',
             leaf:   true,
             iconCls: 'x-fa fa-user',
             routeId:'profile'
         }, {
             text:   'Оплата',
-            view:   'payment.Form',
+            view:   'payment.Payment',
             leaf:   true,
             iconCls: 'x-fa fa-credit-card',
             routeId: 'payment'
@@ -24,9 +24,7 @@ Ext.define('Admin.store.NavigationTree', {
             routeId: 'dashboard'
         }]
     },
-    fields: [
-        {
-            name: 'text'
-        }
-    ]
+    fields: [{
+        name: 'text'
+    }]
 });

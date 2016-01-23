@@ -1,6 +1,6 @@
 Ext.define('Admin.view.main.ViewportController', {
     extend: 'Ext.app.ViewController',
-    alias: 'controller.mainviewport',
+    alias: 'controller.main-viewport',
 
     listen : {
         controller : {
@@ -12,17 +12,6 @@ Ext.define('Admin.view.main.ViewportController', {
 
     routes: {
         ':node': 'onRouteChange'
-    },
-
-    init: function(view) {
-        var me              = this,
-            profileStore    = Ext.data.StoreManager.lookup('Profile');
-
-        profileStore.on('load', this.profileLoad, this);
-    },
-
-    profileLoad: function (store, records, successful, operation) {
-        this.getViewModel().setData({Profile: store.getAt(0)});
     },
 
     setCurrentView: function(hashTag) {
@@ -42,7 +31,7 @@ Ext.define('Admin.view.main.ViewportController', {
             existingItem = mainCard.child('component[routeId=' + hashTag + ']'),
             newView;
 
-        // Kill any previously routed window
+        // Удаление предыдущего представления если оно окно
         if (lastView && lastView.isWindow) {
             lastView.destroy();
         }
@@ -51,24 +40,19 @@ Ext.define('Admin.view.main.ViewportController', {
 
         if (!existingItem) {
             newView = Ext.create('Admin.view.' + (view || 'pages.Error404Window'), {
-                    hideMode: 'offsets',
-                    routeId: hashTag
-                });
+                hideMode: 'offsets',
+                routeId: hashTag
+            });
         }
 
         if (!newView || !newView.isWindow) {
-            // !newView means we have an existing view, but if the newView isWindow
-            // we don't add it to the card layout.
             if (existingItem) {
-                // We don't have a newView, so activate the existing view.
                 if (existingItem !== lastView) {
                     mainLayout.setActiveItem(existingItem);
                 }
                 newView = existingItem;
             }
             else {
-                // newView is set (did not exist already), so add it and make it the
-                // activeItem.
                 Ext.suspendLayouts();
                 mainLayout.setActiveItem(mainCard.add(newView));
                 Ext.resumeLayouts(true);
@@ -86,7 +70,7 @@ Ext.define('Admin.view.main.ViewportController', {
 
     onNavigationTreeSelectionChange: function (tree, node) {
         if (node && node.get('view')) {
-            this.redirectTo( node.get("routeId"));
+            this.redirectTo(node.get("routeId"));
         }
     },
 
@@ -94,43 +78,33 @@ Ext.define('Admin.view.main.ViewportController', {
         var me = this,
             refs = me.getReferences(),
             navigationList = refs.navigationTreeList,
-            wrapContainer = refs.mainContainerWrap,
+            mainContainer = refs.mainContainer,
             collapsing = !navigationList.getMicro(),
             new_width = collapsing ? 64 : 250;
 
         if (Ext.isIE9m || !Ext.os.is.Desktop) {
             Ext.suspendLayouts();
 
-            refs.senchaLogo.setWidth(new_width);
+            refs.ismaxLogo.setWidth(new_width);
 
             navigationList.setWidth(new_width);
             navigationList.setMicro(collapsing);
 
-            Ext.resumeLayouts(); // do not flush the layout here...
+            Ext.resumeLayouts();
 
-            // No animation for IE9 or lower...
-            wrapContainer.layout.animatePolicy = wrapContainer.layout.animate = null;
-            wrapContainer.updateLayout();  // ... since this will flush them
-        }
-        else {
+
+            mainContainer.layout.animatePolicy = mainContainer.layout.animate = null;
+            mainContainer.updateLayout();
+        } else {
             if (!collapsing) {
-                // If we are leaving micro mode (expanding), we do that first so that the
-                // text of the items in the navlist will be revealed by the animation.
                 navigationList.setMicro(false);
             }
 
-            // Start this layout first since it does not require a layout
-            refs.senchaLogo.animate({dynamic: true, to: {width: new_width}});
+            refs.ismaxLogo.animate({dynamic: true, to: {width: new_width}});
 
-            // Directly adjust the width config and then run the main wrap container layout
-            // as the root layout (it and its chidren). This will cause the adjusted size to
-            // be flushed to the element and animate to that new size.
             navigationList.width = new_width;
-            wrapContainer.updateLayout({isRoot: true});
+            mainContainer.updateLayout({isRoot: true});
 
-            // We need to switch to micro mode on the navlist *after* the animation (this
-            // allows the "sweep" to leave the item text in place until it is no longer
-            // visible.
             if (collapsing) {
                 navigationList.on({
                     afterlayoutanimation: function () {
@@ -148,7 +122,7 @@ Ext.define('Admin.view.main.ViewportController', {
         }
     },
 
-    onRouteChange:function(id){
+    onRouteChange: function (id) {
         this.setCurrentView(id);
     }
 });
