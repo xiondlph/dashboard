@@ -6,10 +6,10 @@
     $background-color: $panel-navigation-background-color,
     $toolstrip-background-color: #32404e,
 
-    $tool-float-indicator-color: $panel-header-background-color,
+    $tool-float-indicator-color: $color-ismax-red,
     $tool-float-indicator-width: 5px,
 
-    $tool-indicator-selected-color: $panel-header-background-color,
+    $tool-indicator-selected-color: $color-ismax-red,
     $tool-indicator-selected-width: 5px,
     $tool-selected-background-color: mix(white, $panel-navigation-background-color, 10%),
     //$tool-selected-color: #fff,
@@ -43,8 +43,8 @@
 
     // Style the "row indicator" (the vertical stripe on the left edge):
     $row-indicator-width: 5px,
-    $row-indicator-selected-color: $panel-header-background-color,
-    $row-indicator-selected-over-color: lighten($panel-header-background-color, 7%),
+    $row-indicator-selected-color: $color-ismax-red,
+    $row-indicator-selected-over-color: lighten($color-ismax-red, 7%),
     $row-indicator-over-color: transparent
 );
 
@@ -91,7 +91,7 @@
 //--------------------------------------------------------
 
 .ismax-logo {
-    background-color: $base-color;
+    background-color: $color-ismax-red;
     height: 65px;
 
     font-size: 16px;

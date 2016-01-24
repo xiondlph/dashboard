@@ -34,8 +34,32 @@ Ext.define("Admin.view.main.Viewport",{
             html: '<div class="main-logo"><img src="resources/images/ismax-icon.png">ISMAX icsystem</div>',
             width: 250
         }, {
+            margin: '0 0 0 8',
+            cls: 'delete-focus-bg',
             iconCls:'x-fa fa-navicon',
             handler: 'onToggleNavigationSize'
+        }, {
+            xtype: 'tbspacer',
+            flex: 1
+        }, {
+            xtype: 'tbtext',
+            bind: {
+                text: '{Profile.email}'
+            },
+            cls: 'top-user-name'
+        }, {
+            xtype: 'image',
+            cls: 'header-right-profile-image',
+            height: 35,
+            width: 35,
+            alt:'Profile icon',
+            src: 'resources/images/profile-icon.png'
+        }, {
+            cls: 'delete-focus-bg',
+            iconCls:'x-fa fa-sign-out',
+            href: '/user/signout',
+            hrefTarget: '_self',
+            tooltip: 'Выход'
         }]
     }, {
         xtype: 'container',
