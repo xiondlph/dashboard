@@ -1,4 +1,15 @@
 
+Ext.apply(Ext.form.field.VTypes, {
+    password: function (val, field) {
+        if (field.initialPassField) {
+            var pwd = field.up().getComponent(field.initialPassField).getValue();
+            return (val === pwd);
+        }
+        return true;
+    },
+    passwordText: 'Пароли не совпадают'
+});
+
 Ext.define("Admin.view.profile.Profile",{
     extend: "Ext.container.Container",
 
