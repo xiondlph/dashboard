@@ -1,6 +1,5 @@
 build/
 ext/
 packages/
-sass/example
 bootstrap.*
 workspace.json
