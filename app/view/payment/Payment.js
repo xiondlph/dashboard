@@ -35,6 +35,8 @@ Ext.define("Admin.view.payment.Payment",{
         }]
     }, {
         xtype: 'form',
+        url: 'https://money.yandex.ru/quickpay/confirm.xml',
+        standardSubmit: true,
         itemId: 'payForm',
         defaultType: 'numberfield',
         responsiveCls: 'big-50 small-100',
@@ -48,7 +50,19 @@ Ext.define("Admin.view.payment.Payment",{
             labelWidth: 120,
             anchor: '100%'
         },
+        baseParams: {
+            'receiver': '410011237083903',
+            'formcomment': 'ICSYSTEM - Оплата запросов',
+            'short-dest': 'ICSYSTEM - Оплата запросов',
+            'quickpay-form': 'shop',
+            'targets': 'ICSYSTEM - Оплата запросов',
+            'paymentType': 'PC',
+        },
         items: [{
+            xtype: 'displayfield',
+            fieldLabel: 'Способ оплаты',
+            value: 'Яндекс.Деньги<img src="/resources/images/yamoney.png" />'
+        }, {
             blankText: 'Следует указать сумму',
             fieldLabel: 'Сумма (руб.)',
             validateOnBlur: false,
@@ -57,11 +71,14 @@ Ext.define("Admin.view.payment.Payment",{
             value: 1000,
             name: 'sum'
         }],
+        listeners: {
+            beforeaction: 'beforeAction'
+        },
         buttons: [{
             text: 'Оплатить',
             formBind: true,
             listeners: {
-                click: 'Pay'
+                click: 'payFormSubmit'
             }
         }]
     }]
