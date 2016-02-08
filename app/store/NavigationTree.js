@@ -22,6 +22,11 @@ Ext.define('Admin.store.NavigationTree', {
             leaf:   true,
             iconCls: 'x-fa fa-question',
             routeId: 'dashboard'
+        }, {
+            text:   'Выход',
+            leaf:   true,
+            iconCls: 'x-fa fa-sign-out',
+            routeId: 'signout'
         }]
     },
     fields: [{

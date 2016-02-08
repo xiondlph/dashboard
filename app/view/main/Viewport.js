@@ -57,7 +57,9 @@ Ext.define("Admin.view.main.Viewport",{
         }, {
             cls: 'delete-focus-bg',
             iconCls:'x-fa fa-sign-out',
-            href: '/user/signout',
+            listeners: {
+                click: 'signOut'
+            },
             hrefTarget: '_self',
             tooltip: 'Выход'
         }]

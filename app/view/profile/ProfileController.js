@@ -41,6 +41,11 @@ Ext.define('Admin.view.profile.ProfileController', {
             },
             success: function(record, operation) {
                 btn.up('form').getRecord().commit();
+                Ext.toast({
+                    html: 'Новые настройки сохранены',
+                    closeToolText: 'Закрыть',
+                    closable: true
+                });
             },
             callback: function(record, operation, success) {
                 form.setLoading(false);
@@ -64,6 +69,11 @@ Ext.define('Admin.view.profile.ProfileController', {
             },
             success: function(record, operation) {
                 form.setLoading(false);
+                Ext.toast({
+                    html: 'Новый пароль сохранен',
+                    closeToolText: 'Закрыть',
+                    closable: true
+                });
             }
         })
     } 

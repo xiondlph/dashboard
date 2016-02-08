@@ -14,6 +14,17 @@ Ext.define('Admin.view.main.ViewportController', {
         ':node': 'onRouteChange'
     },
 
+    init: function(view) {
+        var me              = this,
+            profileStore    = Ext.data.StoreManager.lookup('Profile');
+
+        profileStore.on('load', this.profileLoad, this);
+    },
+
+    profileLoad: function (store, records, successful, operation) {
+        this.getViewModel().setData({Profile: store.getAt(0)});
+    },
+
     setCurrentView: function(hashTag) {
         hashTag = (hashTag || '').toLowerCase();
 
@@ -71,6 +82,8 @@ Ext.define('Admin.view.main.ViewportController', {
     onNavigationTreeSelectionChange: function (tree, node) {
         if (node && node.get('view')) {
             this.redirectTo(node.get("routeId"));
+        } else if(node.get("routeId") === 'signout') {
+            this.signOut();
         }
     },
 
@@ -124,5 +137,30 @@ Ext.define('Admin.view.main.ViewportController', {
 
     onRouteChange: function (id) {
         this.setCurrentView(id);
+    },
+
+    signOut: function () {
+        var me = this;
+
+        Ext.Msg.show({
+            title: 'Выход',
+            message: 'Вы действительно хотите выйти?',
+            buttons: Ext.Msg.YESNO,
+            icon: Ext.Msg.QUESTION,
+            closeToolText: 'Закрыть',
+            fn: function (btn) {
+                var refs                = me.getReferences(),
+                    navigationTreeList  = refs.navigationTreeList,
+                    store               = navigationTreeList.getStore(),
+                    viewModel           = me.getViewModel(),
+                    currentRoute        = viewModel.getData().currentView.routeId,
+                    node                = store.findNode('routeId', currentRoute);
+
+                navigationTreeList.setSelection(node);
+                if (btn === 'yes') {
+                    document.location.href = '/user/signout';
+                }
+            }
+        });
     }
 });
