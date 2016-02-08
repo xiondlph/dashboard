@@ -5,7 +5,10 @@ Ext.define("Admin.view.payment.Payment",{
     requires: [
         "Admin.view.payment.PaymentController",
         "Admin.view.payment.PaymentModel",
-        "Ext.ux.layout.ResponsiveColumn"
+        "Ext.ux.layout.ResponsiveColumn",
+        "Ext.grid.Panel",
+        "Ext.form.Panel",
+        "Ext.form.field.Display"
     ],
 
     controller: "payment-payment",
@@ -56,12 +59,12 @@ Ext.define("Admin.view.payment.Payment",{
             'short-dest': 'ICSYSTEM - Оплата запросов',
             'quickpay-form': 'shop',
             'targets': 'ICSYSTEM - Оплата запросов',
-            'paymentType': 'PC',
+            'paymentType': 'PC'
         },
         items: [{
             xtype: 'displayfield',
             fieldLabel: 'Способ оплаты',
-            value: 'Яндекс.Деньги<img src="/resources/images/yamoney.png" />'
+            value: 'Яндекс.Деньги'
         }, {
             blankText: 'Следует указать сумму',
             fieldLabel: 'Сумма (руб.)',

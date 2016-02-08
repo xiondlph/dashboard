@@ -16,7 +16,8 @@ Ext.define("Admin.view.profile.Profile",{
     requires: [
         "Ext.ux.layout.ResponsiveColumn",
         "Admin.view.profile.ProfileController",
-        "Admin.view.profile.ProfileModel"
+        "Admin.view.profile.ProfileModel",
+        "Ext.form.Panel"
     ],
 
     controller: "profile-profile",
