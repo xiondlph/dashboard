@@ -19,6 +19,7 @@ Ext.define('Admin.view.main.ViewportController', {
             profileStore    = Ext.data.StoreManager.lookup('Profile');
 
         profileStore.on('load', this.profileLoad, this);
+        profileStore.load();
     },
 
     profileLoad: function (store, records, successful, operation) {

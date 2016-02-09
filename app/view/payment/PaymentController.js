@@ -3,12 +3,25 @@ Ext.define('Admin.view.payment.PaymentController', {
     alias: 'controller.payment-payment',
 
     init: function(view) {
-        var paymentStore  = Ext.data.StoreManager.lookup('Payments');
-        paymentStore.load();    
+        var paymentStore  = Ext.data.StoreManager.lookup('Payments'),
+            profileStore  = Ext.data.StoreManager.lookup('Profile');
+
+        paymentStore.load();
+        profileStore.on('load', this.profileLoad, this);
     },
 
-    beforeAction: function (form, action) {
-        form.baseParams.label = 'meshkaz';
+    boxready: function (view) {
+        var profileStore = Ext.data.StoreManager.lookup('Profile');
+        if (profileStore.isLoaded()) {
+            return;
+        }
+
+        view.getComponent('payForm').setLoading('Загрузка');
+    },
+
+    profileLoad: function (store, records, successful, operation) {
+        this.getView().getComponent('payForm').setLoading(false);
+        this.getView().getComponent('payForm').getForm().baseParams.label = store.getAt(0).get('email');
     },
 
     payFormSubmit: function (btn) {

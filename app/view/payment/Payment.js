@@ -4,11 +4,7 @@ Ext.define("Admin.view.payment.Payment",{
 
     requires: [
         "Admin.view.payment.PaymentController",
-        "Admin.view.payment.PaymentModel",
-        "Ext.ux.layout.ResponsiveColumn",
-        "Ext.grid.Panel",
-        "Ext.form.Panel",
-        "Ext.form.field.Display"
+        "Admin.view.payment.PaymentModel"
     ],
 
     controller: "payment-payment",
@@ -74,9 +70,6 @@ Ext.define("Admin.view.payment.Payment",{
             value: 1000,
             name: 'sum'
         }],
-        listeners: {
-            beforeaction: 'beforeAction'
-        },
         buttons: [{
             text: 'Оплатить',
             formBind: true,
@@ -84,5 +77,8 @@ Ext.define("Admin.view.payment.Payment",{
                 click: 'payFormSubmit'
             }
         }]
-    }]
+    }],
+    listeners: {
+        boxready: 'boxready'
+    }
 });

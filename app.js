@@ -9,6 +9,12 @@ Ext.application({
     extend: 'Admin.Application',
 
     requires: [
+        "Ext.grid.Panel",
+        "Ext.form.Panel",
+        "Ext.window.Toast",
+        "Ext.form.field.Display",
+        "Ext.form.action.StandardSubmit",
+        "Ext.ux.layout.ResponsiveColumn",
         'Admin.view.main.Viewport',
         'Admin.view.profile.Profile',
         'Admin.view.payment.Payment',

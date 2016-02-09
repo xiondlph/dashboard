@@ -6,18 +6,30 @@ Ext.define('Admin.view.profile.ProfileController', {
         var me              = this,
             profileStore    = Ext.data.StoreManager.lookup('Profile');
 
+        profileStore.on('load', this.profileLoad, this);
+        if (profileStore.isLoaded()) {
+            this.profileLoad(profileStore);
+        }
+    },
+
+    boxready: function (view) {
+        var profileStore = Ext.data.StoreManager.lookup('Profile');
+        if (profileStore.isLoaded()) {
+            return;
+        }
 
         view.getComponent('infoForm').setLoading('Загрузка');
         view.getComponent('settingForm').setLoading('Загрузка');
-        profileStore.load(function(records, operation, success) {
-            me.getViewModel().setData({User: profileStore.getAt(0)});
+    },
 
-            view.getComponent('infoForm').loadRecord(profileStore.getAt(0));
-            view.getComponent('settingForm').loadRecord(profileStore.getAt(0));
+    profileLoad: function (store, records, successful, operation) {
+        this.getViewModel().setData({User: store.getAt(0)});
 
-            view.getComponent('infoForm').setLoading(false);
-            view.getComponent('settingForm').setLoading(false);
-        });
+        this.getView().getComponent('infoForm').loadRecord(store.getAt(0));
+        this.getView().getComponent('settingForm').loadRecord(store.getAt(0));
+
+        this.getView().getComponent('infoForm').setLoading(false);
+        this.getView().getComponent('settingForm').setLoading(false);
     },
 
     saveSettings: function (btn) {
@@ -31,14 +43,6 @@ Ext.define('Admin.view.profile.ProfileController', {
 
         form.setLoading('Сохранение');
         btn.up('form').getRecord().save({
-            failure: function(record, operation) {
-                Ext.MessageBox.show({
-                    title: 'Ошибка',
-                    msg: 'Действие временно недоступно.<br />Попробуйте повторить позже!',
-                    buttons: Ext.MessageBox.OK,
-                    icon: Ext.MessageBox.ERROR
-                });
-            },
             success: function(record, operation) {
                 btn.up('form').getRecord().commit();
                 Ext.toast({
@@ -60,12 +64,6 @@ Ext.define('Admin.view.profile.ProfileController', {
         form.submit({
             failure: function(record, operation) {
                 form.setLoading(false);
-                Ext.MessageBox.show({
-                    title: 'Ошибка',
-                    msg: 'Действие временно недоступно.<br />Попробуйте повторить позже!',
-                    buttons: Ext.MessageBox.OK,
-                    icon: Ext.MessageBox.ERROR
-                });
             },
             success: function(record, operation) {
                 form.setLoading(false);

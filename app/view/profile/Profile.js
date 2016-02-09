@@ -14,10 +14,8 @@ Ext.define("Admin.view.profile.Profile",{
     extend: "Ext.container.Container",
 
     requires: [
-        "Ext.ux.layout.ResponsiveColumn",
         "Admin.view.profile.ProfileController",
-        "Admin.view.profile.ProfileModel",
-        "Ext.form.Panel"
+        "Admin.view.profile.ProfileModel"
     ],
 
     controller: "profile-profile",
@@ -119,5 +117,8 @@ Ext.define("Admin.view.profile.Profile",{
             fieldLabel: 'Ключ',
             dataIndex: 'key'
         }]
-    }]
+    }],
+    listeners: {
+        boxready: 'boxready'
+    }
 });
