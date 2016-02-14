@@ -66,7 +66,7 @@ Ext.define("Admin.view.payment.Payment",{
             fieldLabel: 'Сумма (руб.)',
             validateOnBlur: false,
             maxValue: 10000,
-            minValue: 0,
+            minValue: 10,
             value: 1000,
             name: 'sum'
         }],

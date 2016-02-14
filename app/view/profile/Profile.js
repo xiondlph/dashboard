@@ -46,7 +46,12 @@ Ext.define("Admin.view.profile.Profile",{
         }, {
             blankText: 'Необходимо привязать IP адрес',
             fieldLabel: 'IP адрес',
-            name: 'address'
+            name: 'address',
+            triggers: {
+                hint: {
+                    cls: 'trigger-question'
+                }
+            }
         }],
         buttons: [{
             text: 'Сохранить',
@@ -102,20 +107,34 @@ Ext.define("Admin.view.profile.Profile",{
         bodyPadding: 10,
         defaults: {
             labelWidth: 120,
-            readOnly: true,
+            // readOnly: true,
+            editable: false,
             anchor: '100%'
         },
         items: [{
             fieldLabel: 'Запросов',
             dataIndex: 'requests',
             triggers: {
-                glyphed: {
-                    cls: 'trigger-glyph-noop auth-email-trigger'
+                payment: {
+                    cls: 'trigger-payment',
+                    hideOnReadOnly: false,
+                    handler: 'goPayment'
+                },
+                hint: {
+                    cls: 'trigger-question',
+                    hideOnReadOnly: false
                 }
             }
         }, {
             fieldLabel: 'Ключ',
-            dataIndex: 'key'
+            dataIndex: 'key',
+            triggers: {
+                hint: {
+                    cls: 'trigger-clipboard',
+                    hideOnReadOnly: false,
+                    handler: 'copyKey'
+                }
+            }
         }]
     }],
     listeners: {

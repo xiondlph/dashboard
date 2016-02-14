@@ -20,6 +20,27 @@ Ext.define('Admin.view.profile.ProfileController', {
 
         view.getComponent('infoForm').setLoading('Загрузка');
         view.getComponent('settingForm').setLoading('Загрузка');
+
+        Ext.create('Ext.tip.ToolTip', {
+            target: view.getComponent('settingForm').items.getAt(1).getTrigger('hint').getEl(),
+            html: 'В целях безопасности, доступ к API осуществляться исключительно с IP адреса привязанного к Вашему аккаунту.'
+        });
+
+        Ext.create('Ext.tip.ToolTip', {
+            target: view.getComponent('infoForm').items.getAt(0).getTrigger('payment').getEl(),
+            html: 'Пополнить запросы'
+        });
+
+        Ext.create('Ext.tip.ToolTip', {
+            target: view.getComponent('infoForm').items.getAt(0).getTrigger('hint').getEl(),
+            html: 'Запросы - показатель количества запросов для Вашего аккаунта, на которые не действует лимит.'
+        });
+
+        Ext.create('Ext.tip.ToolTip', {
+            target: view.getComponent('infoForm').items.getAt(1).getTrigger('hint').getEl(),
+            html: 'Копировать в буфер.',
+            hideDelay: 500
+        });
     },
 
     profileLoad: function (store, records, successful, operation) {
@@ -46,9 +67,7 @@ Ext.define('Admin.view.profile.ProfileController', {
             success: function(record, operation) {
                 btn.up('form').getRecord().commit();
                 Ext.toast({
-                    html: 'Новые настройки сохранены',
-                    closeToolText: 'Закрыть',
-                    closable: true
+                    html: 'Новые настройки сохранены'
                 });
             },
             callback: function(record, operation, success) {
@@ -66,13 +85,25 @@ Ext.define('Admin.view.profile.ProfileController', {
                 form.setLoading(false);
             },
             success: function(record, operation) {
+                form.reset();
                 form.setLoading(false);
                 Ext.toast({
-                    html: 'Новый пароль сохранен',
-                    closeToolText: 'Закрыть',
-                    closable: true
+                    html: 'Новый пароль сохранен'
                 });
             }
         })
-    } 
+    },
+
+    goPayment: function () {
+        this.redirectTo('payment');
+    },
+
+    copyKey: function (field) {
+        field.focus().selectText();
+        try {
+            var successful = document.execCommand('copy');
+        } catch (err) {
+            console.info('Cope failed');
+        }
+    }
 });
