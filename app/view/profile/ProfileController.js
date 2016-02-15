@@ -14,12 +14,6 @@ Ext.define('Admin.view.profile.ProfileController', {
 
     boxready: function (view) {
         var profileStore = Ext.data.StoreManager.lookup('Profile');
-        if (profileStore.isLoaded()) {
-            return;
-        }
-
-        view.getComponent('infoForm').setLoading('Загрузка');
-        view.getComponent('settingForm').setLoading('Загрузка');
 
         Ext.create('Ext.tip.ToolTip', {
             target: view.getComponent('settingForm').items.getAt(1).getTrigger('hint').getEl(),
@@ -41,6 +35,13 @@ Ext.define('Admin.view.profile.ProfileController', {
             html: 'Копировать в буфер.',
             hideDelay: 500
         });
+
+        if (profileStore.isLoaded()) {
+            return;
+        }
+
+        view.getComponent('infoForm').setLoading('Загрузка');
+        view.getComponent('settingForm').setLoading('Загрузка');
     },
 
     profileLoad: function (store, records, successful, operation) {

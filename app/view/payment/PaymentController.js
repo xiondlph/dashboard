@@ -13,6 +13,7 @@ Ext.define('Admin.view.payment.PaymentController', {
     boxready: function (view) {
         var profileStore = Ext.data.StoreManager.lookup('Profile');
         if (profileStore.isLoaded()) {
+            view.getComponent('payForm').getForm().baseParams.label = profileStore.getAt(0).get('email');
             return;
         }
 
