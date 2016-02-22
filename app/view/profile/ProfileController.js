@@ -27,12 +27,28 @@ Ext.define('Admin.view.profile.ProfileController', {
 
         Ext.create('Ext.tip.ToolTip', {
             target: view.getComponent('infoForm').items.getAt(0).getTrigger('hint').getEl(),
-            html: 'Запросы - показатель количества запросов для Вашего аккаунта, на которые не действует лимит.'
+            html: 'Количество доступных запросов к ресурсам API, для Вашего аккаутна.'
+        });
+
+        Ext.create('Ext.tip.ToolTip', {
+            target: view.getComponent('infoForm').items.getAt(1).getTrigger('clipboard').getEl(),
+            hideDelay: 500,
+            id: 'clipboard',
+            listeners: {
+                beforeshow: function updateTip(tip) {
+                    tip.update('Копировать в буфер.');
+                }
+            }
         });
 
         Ext.create('Ext.tip.ToolTip', {
             target: view.getComponent('infoForm').items.getAt(1).getTrigger('hint').getEl(),
-            html: 'Копировать в буфер.',
+            html: [
+                'Ключ используется для осуществлении доступа без привязки к IP.',
+                'Для использования ключа,',
+                'его следует передавать во всех запросах в HTTP-заголовке X-Ismax-key.',
+                'При использовании ключа, проверка по IP не производиться.'
+            ].join(' '),
             hideDelay: 500
         });
 
@@ -68,7 +84,10 @@ Ext.define('Admin.view.profile.ProfileController', {
             success: function(record, operation) {
                 btn.up('form').getRecord().commit();
                 Ext.toast({
-                    html: 'Новые настройки сохранены'
+                    html: 'Новые настройки сохранены',
+                    closeToolText: 'Закрыть',
+                    iconCls: 'x-fa fa-comments',
+                    closable: true
                 });
             },
             callback: function(record, operation, success) {
@@ -89,7 +108,10 @@ Ext.define('Admin.view.profile.ProfileController', {
                 form.reset();
                 form.setLoading(false);
                 Ext.toast({
-                    html: 'Новый пароль сохранен'
+                    html: 'Новый пароль сохранен',
+                    closeToolText: 'Закрыть',
+                    iconCls: 'x-fa fa-comments',
+                    closable: true
                 });
             }
         })
@@ -102,7 +124,13 @@ Ext.define('Admin.view.profile.ProfileController', {
     copyKey: function (field) {
         field.focus().selectText();
         try {
-            var successful = document.execCommand('copy');
+            var successful  = document.execCommand('copy'),
+                tips        = Ext.getCmp('clipboard');
+
+            if (successful) {
+                tips.show(10, 10);
+                tips.update('Скопировано!');
+            }
         } catch (err) {
             console.info('Cope failed');
         }

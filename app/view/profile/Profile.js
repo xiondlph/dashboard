@@ -42,7 +42,8 @@ Ext.define("Admin.view.profile.Profile",{
         items: [{
             blankText: 'Следует указать Email',
             fieldLabel: 'Email',
-            name: 'email'
+            name: 'email',
+            vtype: 'email'
         }, {
             blankText: 'Необходимо привязать IP адрес',
             fieldLabel: 'IP адрес',
@@ -129,10 +130,14 @@ Ext.define("Admin.view.profile.Profile",{
             fieldLabel: 'Ключ',
             dataIndex: 'key',
             triggers: {
-                hint: {
+                clipboard: {
                     cls: 'trigger-clipboard',
                     hideOnReadOnly: false,
                     handler: 'copyKey'
+                },
+                hint: {
+                    cls: 'trigger-question',
+                    hideOnReadOnly: false
                 }
             }
         }]

@@ -1,4 +1,4 @@
-@mixin btn-border($background-color){
+@mixin btn-border($background-color) {
     background-color: $background-color;
     border-color: $background-color !important;
     .x-btn-inner-default-toolbar-small{
@@ -57,6 +57,17 @@
 
 .boldFont {
     font-weight: bold;
+}
+
+
+// Поле яндекс деньги
+.y-money-field {
+    .x-form-display-field-body {
+        background-image: url(images/yamoney.png);
+        background-position: right top;
+        background-repeat: no-repeat;
+        background-size: 18%;
+    }
 }
 
 

@@ -60,7 +60,8 @@ Ext.define("Admin.view.payment.Payment",{
         items: [{
             xtype: 'displayfield',
             fieldLabel: 'Способ оплаты',
-            value: 'Яндекс.Деньги'
+            value: 'Яндекс.Деньги',
+            cls: 'y-money-field'
         }, {
             blankText: 'Следует указать сумму',
             fieldLabel: 'Сумма (руб.)',
