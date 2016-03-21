@@ -140,6 +140,16 @@ Ext.define("Admin.view.profile.Profile",{
                     hideOnReadOnly: false
                 }
             }
+        }, {
+            fieldLabel: 'Реф-ссылка',
+            dataIndex: 'ref',
+            triggers: {
+                clipboard: {
+                    cls: 'trigger-clipboard',
+                    hideOnReadOnly: false,
+                    handler: 'copyRef'
+                }
+            }
         }]
     }],
     listeners: {

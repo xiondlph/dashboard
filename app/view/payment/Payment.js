@@ -1,4 +1,3 @@
-
 Ext.define("Admin.view.payment.Payment",{
     extend: "Ext.container.Container",
 
