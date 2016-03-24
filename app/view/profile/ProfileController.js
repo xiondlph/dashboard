@@ -31,7 +31,12 @@ Ext.define('Admin.view.profile.ProfileController', {
         });
 
         Ext.create('Ext.tip.ToolTip', {
-            target: view.getComponent('infoForm').items.getAt(1).getTrigger('clipboard').getEl(),
+            target: view.getComponent('infoForm').items.getAt(1).getTrigger('hint').getEl(),
+            html: 'Количество бонусов.'
+        });
+
+        Ext.create('Ext.tip.ToolTip', {
+            target: view.getComponent('infoForm').items.getAt(2).getTrigger('clipboard').getEl(),
             hideDelay: 500,
             id: 'clipboardKey',
             listeners: {
@@ -42,7 +47,18 @@ Ext.define('Admin.view.profile.ProfileController', {
         });
 
         Ext.create('Ext.tip.ToolTip', {
-            target: view.getComponent('infoForm').items.getAt(2).getTrigger('clipboard').getEl(),
+            target: view.getComponent('infoForm').items.getAt(2).getTrigger('hint').getEl(),
+            html: [
+                'Ключ используется для осуществлении доступа без привязки к IP.',
+                'Для использования ключа,',
+                'его следует передавать во всех запросах в HTTP-заголовке X-Ismax-key.',
+                'При использовании ключа, проверка по IP не производиться.'
+            ].join(' '),
+            hideDelay: 500
+        });
+
+        Ext.create('Ext.tip.ToolTip', {
+            target: view.getComponent('infoForm').items.getAt(3).getTrigger('clipboard').getEl(),
             hideDelay: 500,
             id: 'clipboardRef',
             listeners: {
@@ -52,16 +68,6 @@ Ext.define('Admin.view.profile.ProfileController', {
             }
         });
 
-        Ext.create('Ext.tip.ToolTip', {
-            target: view.getComponent('infoForm').items.getAt(1).getTrigger('hint').getEl(),
-            html: [
-                'Ключ используется для осуществлении доступа без привязки к IP.',
-                'Для использования ключа,',
-                'его следует передавать во всех запросах в HTTP-заголовке X-Ismax-key.',
-                'При использовании ключа, проверка по IP не производиться.'
-            ].join(' '),
-            hideDelay: 500
-        });
 
         if (profileStore.isLoaded()) {
             return;

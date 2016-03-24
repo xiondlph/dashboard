@@ -127,6 +127,15 @@ Ext.define("Admin.view.profile.Profile",{
                 }
             }
         }, {
+            fieldLabel: 'Бонусы (руб.)',
+            dataIndex: 'bonus',
+            triggers: {
+                hint: {
+                    cls: 'trigger-question',
+                    hideOnReadOnly: false
+                }
+            }
+        }, {
             fieldLabel: 'Ключ',
             dataIndex: 'key',
             triggers: {
